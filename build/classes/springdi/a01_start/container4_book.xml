@@ -19,14 +19,10 @@
        http://www.springframework.org/schema/util/spring-util.xsd
          http://www.springframework.org/schema/websocket
       http://www.springframework.org/schema/websocket/spring-websocket.xsd">
-      
-	<!-- 
-	스프링에서 사용하게 될 초기 로딩객체를 선언한다.
-	 -->
-	<bean class="springweb.a01_start.A01_StartController"></bean>
-	<bean class="springweb.z01_exp.A01_ExpController"></bean>
-	<bean class="springweb.a01_start.A02_EmpController"></bean>
-	<bean class="springweb.a01_start.A03_DeptController"></bean>
-	<bean class="springweb.a01_start.A04_MemberController"></bean>
 	
+	<bean id="b01" class="springdi.a01_start.z01_vo.Book">
+		<constructor-arg value="정보처리"/>
+		<constructor-arg value="30000"/>
+		<constructor-arg value="이기적"/>
+	</bean>
 </beans>

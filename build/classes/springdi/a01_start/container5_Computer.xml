@@ -19,14 +19,23 @@
        http://www.springframework.org/schema/util/spring-util.xsd
          http://www.springframework.org/schema/websocket
       http://www.springframework.org/schema/websocket/spring-websocket.xsd">
-      
-	<!-- 
-	스프링에서 사용하게 될 초기 로딩객체를 선언한다.
-	 -->
-	<bean class="springweb.a01_start.A01_StartController"></bean>
-	<bean class="springweb.z01_exp.A01_ExpController"></bean>
-	<bean class="springweb.a01_start.A02_EmpController"></bean>
-	<bean class="springweb.a01_start.A03_DeptController"></bean>
-	<bean class="springweb.a01_start.A04_MemberController"></bean>
 	
+	<bean id="cpu" class="springdi.a01_start.z01_vo.Cpu">
+		<constructor-arg value="인텔"/>
+		<constructor-arg value="i5-2000"/>
+	</bean>
+	<bean id="ram" class="springdi.a01_start.z01_vo.Ram">
+		<constructor-arg value="삼성"/>
+		<constructor-arg value="8G"/>
+	</bean>
+	<bean id="hdd" class="springdi.a01_start.z01_vo.Hdd">
+		<constructor-arg value="삼성"/>
+		<constructor-arg value="1TB"/>
+	</bean>
+	<bean id="com" class="springdi.a01_start.z01_vo.Computer">
+		<property name="name" value="삼성컴퓨터"/>
+		<property name="cpu" ref="cpu"/>
+		<property name="ram" ref="ram"/>
+		<property name="hdd" ref="hdd"/>
+	</bean>
 </beans>
