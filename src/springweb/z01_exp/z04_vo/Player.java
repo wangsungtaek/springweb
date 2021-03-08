@@ -1,46 +1,29 @@
-package springdi.a01_start.z01_vo;
-// springdi.a01_start.z01_vo.Person
+package springweb.z01_exp.z04_vo;
+
 import org.springframework.stereotype.Component;
 
-@Component
-public class Person {
+@Component("play01")
+public class Player {
 	private String name;
 	private int age;
-	private String loc;
-	
-	public Person() {
+	public Player() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public Person(String name, int age, String loc) {
+	public Player(String name, int age) {
 		super();
 		this.name = name;
 		this.age = age;
-		this.loc = loc;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public int getAge() {
 		return age;
 	}
-
 	public void setAge(int age) {
 		this.age = age;
 	}
-
-	public String getLoc() {
-		return loc;
-	}
-
-	public void setLoc(String loc) {
-		this.loc = loc;
-	}
-	
 }

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+      http://www.springframework.org/schema/mvc/spring-mvc.xsd     
+        http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+         http://www.springframework.org/schema/websocket
+      http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+<!-- 
+[하] 1. 1:다의 예제로  스포츠에  팀과 선수를 설정하여 Team, 
+ArrayList<Player> 형태로 처리하셩 출력하세요
+ -->
+	<bean id="p01" class="springweb.z01_exp.z01_vo.Player">
+		<property name="name" value="1번선수"/>
+		<property name="age" value="20"/>
+	</bean>
+	<bean id="p02" class="springweb.z01_exp.z01_vo.Player">
+		<property name="name" value="2번선수"/>
+		<property name="age" value="22"/>
+	</bean>
+	<bean id="p03" class="springweb.z01_exp.z01_vo.Player">
+		<property name="name" value="3번선수"/>
+		<property name="age" value="23"/>
+	</bean>
+	
+	<bean id="team" class="springweb.z01_exp.z01_vo.Team">
+		<property name="name" value="현대"/>
+		<property name="plist">
+			<list>
+				<ref bean="p01"/>
+				<ref bean="p02"/>
+				<ref bean="p03"/>
+			</list>
+		</property>
+	</bean>
+<!-- 
+[하] 2. 여러가지 Collection 타입(list, set, properties, map)의 특징을 기술하고,
+ 해당 예제를 di로 처리하세요.
+ -->
+	<bean id="sensor" class="springweb.z01_exp.z01_vo.Sensor">
+		<!-- 
+		# List타입의 특징
+			1. 객체 및 데이터를 저장할 수 있다.
+			2. 중복을 허용한다.
+			3. 순서확보가 된다.
+		 -->
+		<property name="list">
+			<list>
+				<value>사자</value>
+				<value>호랑이</value>
+				<value>뱀</value>
+				<value>사자</value>
+			</list>
+		</property>
+		<!-- 
+		# Set타입의 특징
+			1. 순서확보가 되지 않는다.
+			2. 중복을 허용하지 않는다.
+		 -->
+		<property name="set">
+			<set>
+				<value>사자</value>
+				<value>호랑이</value>
+				<value>뱀</value>
+				<value>사자</value>
+			</set>
+		</property>
+		<!-- 
+		# Properties타입의 특징
+			1. 여러개의 key, value형식의 데이터를 할당하여 처리할 수 있다.
+			2. key:value으로 단위 데이터가 매핑되어 있다.
+			3. prop로 위 단위 데이터를 누적해서 할당하여 처리하고 있다.
+		 -->
+		<property name="prop">
+			<props>
+				<prop key="동물1">사자</prop>
+				<prop key="동물2">호랑이</prop>
+				<prop key="동물3">뱀</prop>
+			</props>
+		</property>
+		<!-- 
+		# Map타입의 특징
+			1. key, value의 모임으로 처리하나
+				key의 type과 value의 type을 사용자 지정하여 처리할 수 있다.
+		 -->
+		<property name="map">
+			<map>
+				<entry key="동물1" value="사자"/>
+				<entry key="동물2" value="호랑이"/>
+				<entry key="동물3" value="뱀"/>
+			</map>
+		</property>
+	</bean>
+<!-- 
+[하] 3. z04_vo 폴드에 Team, Player, Game 클래스를 선언하고, 
+해당 클래스롤 객체로 로딩하는 처리를 @Component형식, RegExp형식으로 호출하여 처리하세요
+-->
+	<!-- @Component형식 -->
+	<context:component-scan base-package="springweb.z01_exp.z04_vo"/>
+	
+	<!-- RegExp형식 -->
+	<!--
+	<context:component-scan base-package="springweb.z01_exp.z04_vo">
+		<context:include-filter type="regex" expression=".*"/>
+	</context:component-scan>
+	-->
+<!-- 
+[하] 4. info2 파일에 물건명, 가격, 갯수를 key=value 형식으로 저장하고, 
+해당 파일로 Product 클래스롤 di로 호출한 객체에서
+할당하여, 저장된 값을 호출하세요. 
+-->
+	<context:property-placeholder location="classpath:/springweb/z01_exp/info2"/>
+	<bean name="product" class="springweb.z01_exp.z01_vo.Product">
+		<property name="name" value="${name}"/>
+		<property name="price" value="${price}"/>
+		<property name="cnt" value="${cnt}"/>
+	</bean>
+</beans>

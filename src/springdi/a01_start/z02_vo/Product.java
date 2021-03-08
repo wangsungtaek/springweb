@@ -1,23 +1,22 @@
-package springdi.a01_start.z01_vo;
+package springdi.a01_start.z02_vo;
 
 import org.springframework.stereotype.Component;
 
-@Component
-public class Book {
-	
+@Component("prod03")
+public class Product {
 	private String name;
 	private int price;
-	private String author;
+	private int cnt;
 	
-	public Book() {
-		
+	public Product() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public Book(String name, int price, String author) {
+	public Product(String name, int price, int cnt) {
 		super();
 		this.name = name;
 		this.price = price;
-		this.author = author;
+		this.cnt = cnt;
 	}
 
 	public String getName() {
@@ -36,13 +35,12 @@ public class Book {
 		this.price = price;
 	}
 
-	public String getAuthor() {
-		return author;
+	public int getCnt() {
+		return cnt;
 	}
 
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
-	
 	
 }

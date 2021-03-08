@@ -21,4 +21,13 @@
          http://www.springframework.org/schema/websocket
       http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 	
+	<!-- 
+	# compnent-scan 옵션
+	1. 특정한 package를 지정하여 해당 패키지에 포함되어 있는 객체를
+		선택하여 container메모리에 로딩하는 것을 말한다.
+	2. 해당객체들의 id값은 자동으로 클래스명의 소문자형태로 지정이된다.
+		id="book"class="springdi.z01_vo.Book"
+	 -->
+	<context:component-scan base-package="springdi.a01_start.z01_vo"/>
+
 </beans>

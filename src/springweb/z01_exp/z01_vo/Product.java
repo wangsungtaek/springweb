@@ -1,8 +1,5 @@
-package springdi.a01_start.z01_vo;
-
-import org.springframework.stereotype.Component;
-
-@Component("prod")
+package springweb.z01_exp.z01_vo;
+// springweb.z01_exp.z01_vo.Product
 public class Product {
 	private String name;
 	private int price;

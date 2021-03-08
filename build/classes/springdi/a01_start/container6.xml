@@ -20,5 +20,44 @@
        http://www.springframework.org/schema/util/spring-util.xsd
          http://www.springframework.org/schema/websocket
       http://www.springframework.org/schema/websocket/spring-websocket.xsd">
-	
+	<!-- 
+	ex) Restore라 vo객체 생성
+	1. ArryList<String>, Set<String>, Properties, Map<String, String>
+		할당할 수 있는 필드를 선언하고, set메서드 선언하고,
+		toString()메서드를 통해서 해당 저장된 내용을 출력되게 처리하세요.
+	2. 위 정의된 내용을 DI로 선언, DL로 호출하여 처리.
+	 -->
+	<bean id="restore" class="springdi.a01_start.z01_vo.Restore">
+		<property name="arrayList">
+			<list>
+				<value>가</value>
+				<value>나</value>
+				<value>다</value>
+			</list>
+		</property>
+		<property name="set">
+			<set>
+				<value>111</value>
+				<value>222</value>
+				<value>333</value>
+				<value>111</value>
+			</set>
+		</property>
+		<property name="proper">
+			<props>
+				<prop key="test">000</prop>
+				<prop key="test1">111</prop>
+				<prop key="test2">222</prop>
+				<prop key="test2">333</prop>
+			</props>		
+		</property>
+		<property name="map">
+			<map>
+				<entry key="on0" value="안녕1"/>
+				<entry key="on1" value="안녕2"/>
+				<entry key="on2" value="안녕3"/>
+				<entry key="on3" value="안녕4"/>
+			</map>
+		</property>
+	</bean>
 </beans>
