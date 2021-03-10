@@ -1,5 +1,5 @@
 package springdi.a01_start.z01_vo;
-
+// springdi.a01_start.z01_vo.Product
 import org.springframework.stereotype.Component;
 
 @Component("prod")

@@ -41,6 +41,8 @@ ArrayList<Player> 형태로 처리하셩 출력하세요
 		<property name="name" value="현대"/>
 		<property name="plist">
 			<list>
+				<!--  객체를 할당할 때, ref 속성값 bean으로 선언된 객체의
+				id, name값을 할당한다 -->
 				<ref bean="p01"/>
 				<ref bean="p02"/>
 				<ref bean="p03"/>
@@ -57,6 +59,7 @@ ArrayList<Player> 형태로 처리하셩 출력하세요
 			1. 객체 및 데이터를 저장할 수 있다.
 			2. 중복을 허용한다.
 			3. 순서확보가 된다.
+			: 선형으로 순서 확보되는 구조, 중복허용
 		 -->
 		<property name="list">
 			<list>
@@ -70,6 +73,7 @@ ArrayList<Player> 형태로 처리하셩 출력하세요
 		# Set타입의 특징
 			1. 순서확보가 되지 않는다.
 			2. 중복을 허용하지 않는다.
+			: 중복허용하지 않는 비선형 구조
 		 -->
 		<property name="set">
 			<set>
@@ -84,6 +88,7 @@ ArrayList<Player> 형태로 처리하셩 출력하세요
 			1. 여러개의 key, value형식의 데이터를 할당하여 처리할 수 있다.
 			2. key:value으로 단위 데이터가 매핑되어 있다.
 			3. prop로 위 단위 데이터를 누적해서 할당하여 처리하고 있다.
+			: key,value형식의 데이터 처리 key는 중복허용 않됨
 		 -->
 		<property name="prop">
 			<props>
@@ -96,6 +101,7 @@ ArrayList<Player> 형태로 처리하셩 출력하세요
 		# Map타입의 특징
 			1. key, value의 모임으로 처리하나
 				key의 type과 value의 type을 사용자 지정하여 처리할 수 있다.
+				: key, value객체형으로 할당이 가능하다 key는 중복허용되지 않음.
 		 -->
 		<property name="map">
 			<map>

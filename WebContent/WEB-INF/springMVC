@@ -42,7 +42,20 @@
 	bean클래스 선언을 통해서 tomcat이 시작되어
 	첫번째 호출 될 때, 사용할 객체 메모리로 로딩.
 		- Controller를 등록 처리.
-	
+	- 사용자 정의 객체에 대한 로딩
+		controller/service/doa단 설정위치 처리
+	- framework에 지원되는 여러 클래스를 객체로 로딩 처리
+		주로 활용되는 내용
+		공통 controller/service/doa단 설정위치 처리
+		소스에서 호출하여 처리 방법 선언 : Anootation 코드를 autowire로
+		여러가지 viewResolver의 등록 처리(json, 파일업로드/다운로드..)
+		database베이스 처리 framework 등록(mybatis)
+		사용할 공통 key값 등록 호출.(연결할 서버 정보-DB서버, 파일서버, 메일서버)
+		다국어 처리 모듈 등록.
+		배치 파일 모듈 등록
+		
+		
+		
 3. spring MVC
 	- Controller : java 클래스로 선언
 		controller --> service --> dao
@@ -128,4 +141,8 @@
 	form(@RequestParam("name") String name)
 	요청값을 name의 key String name에 할당하여 가져올 수 있다.
 2. 객체로 요청값 처리
-3. 
+
+
+# ModelAttribute
+1. controller단의 공통 모델데이터에 대한 선언.
+2. 요청값+모델데이터를 동시에 처리
