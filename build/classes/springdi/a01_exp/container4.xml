@@ -36,4 +36,10 @@
 	<bean id="company" class="springdi.a01_exp.z02_vo.Company">
 		<constructor-arg value="홍컴퍼니" />
 	</bean>
+	<!-- 
+	<context:component-scan base-package="springdi.a01_exp.z02_vo">
+		<context:include-filter type="regex" expression=".*"/>
+	</context:component-scan>
+	 -->
+	
 </beans>

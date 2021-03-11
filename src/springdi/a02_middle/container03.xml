@@ -32,6 +32,13 @@ autowire설정.
 3. 여러개의 객체가 메모리에 로딩될 때, 처리 방법.
 	
  -->
+ 	<!-- 
+	<context:annotation-config/>
+	하단에 context:component-scan에서 포함된 클래스만 소스상 annotation
+	형태로 선언할 때, 생략이 가능하다.
+	단, 컨테이너에서 context:component-scan 범외이외에 객체가 선언하여
+	소스상 annotation 상 사용하는 경우에는 반드시 선언하여야 한다..
+	-->
 	<context:annotation-config/>
 	<context:component-scan base-package="springdi.a02_middle.z01_vo">
 		<context:include-filter type="regex" expression=".*"/>

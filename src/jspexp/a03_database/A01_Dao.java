@@ -692,7 +692,115 @@ public class A01_Dao {   //DAO : database access object
 			}
 	   }
 
-   public static void main(String[] args) {
+   // 조회 처리 메서드 (PrepardStatement 사용)
+   public ArrayList<Emp> empList(Emp sch){
+	      ArrayList<Emp> list = new ArrayList<Emp>();
+	      try {
+	         setCon();
+             String sql = "SELECT e.*, d.dname, m.ename mname  \r\n"
+                     + "   FROM emp e, dept d, emp m   \r\n"
+                     + "   WHERE e.mgr = m.empno and e.deptno=d.deptno AND e.ename LIKE '%'||upper( ? )||'%'\r\n"
+                     + "   AND e.job  LIKE '%'||upper( ? )||'%'\r\n";
+               if(sch.getDeptno()!=0) {
+                  sql +=" AND e.deptno = ?";
+               }
+               if(sch.getMgr()!=0) {
+            	   sql +=" AND e.mgr = ?";
+               }               
+             sql      += "   ORDER BY e.empno desc "; 
+	         System.out.println(sql);
+	         pstmt = con.prepareStatement(sql);
+	         pstmt.setString(1, sch.getEname());
+	         pstmt.setString(2, sch.getJob());
+	         int cIdx=3;
+	         if(sch.getDeptno() != 0)
+	        	 pstmt.setInt(cIdx++, sch.getDeptno());
+	         if(sch.getMgr() != 0)
+	        	 pstmt.setInt(cIdx++, sch.getMgr());
+	         
+	         rs = pstmt.executeQuery();
+	
+	         int cnt=1;
+	         while(rs.next()) {
+	            
+	            System.out.print(cnt++ + ":" + rs.getInt(1)+"\t");
+	            System.out.print(rs.getString("ename")+"\t");
+	            System.out.print(rs.getString("job")+"\t");
+	            System.out.print(rs.getInt("mgr")+"\t");
+	            System.out.print(rs.getDate("hiredate")+"\t");
+	            System.out.print(rs.getDouble("sal")+"\t");
+	            System.out.print(rs.getDouble("comm")+"\t");
+	            System.out.print(rs.getInt("deptno")+"\n");
+	           
+
+	            Emp e = new Emp(rs.getInt("empno"),rs.getString(2),
+	                  rs.getString(3),rs.getInt(4),rs.getDate("hiredate"),
+	                  rs.getDouble(6),rs.getDouble(7),rs.getInt(8),
+	                  rs.getString(9),rs.getString(10));
+
+	            list.add(e);
+	            
+	         }
+	         System.out.println("객체의 갯수:"+list.size());
+	         System.out.println("첫번째 행의 ename : "+list.get(0).getEname());
+	         System.out.println("두번째 행의 ename : "+list.get(1).getEname());
+
+	         rs.close();
+	         pstmt.close();
+	         con.close();
+	      // 5. 예외 처리
+	      } catch (SQLException e1) {
+	         // TODO Auto-generated catch block
+	         e1.printStackTrace();
+	         System.out.println(e1.getMessage());
+	      }catch(Exception e) {
+	         System.out.println(e.getMessage());
+	      }
+	      return list;
+	}
+  	public ArrayList<Emp> mgrList() {
+		ArrayList<Emp> list = new ArrayList<Emp>();
+		// 1. 공통메서드 호출
+		try {
+			setCon();
+			// 2. Statement 객체 생성 (연결객체 - Connection)
+			String sql = "SELECT DISTINCT e.mgr, m.ename\r\n" + "FROM emp e, emp m\r\n" + "WHERE e.mgr = m.empno";
+			stmt = con.createStatement();
+			// 3. ResultSet 객체 생성 (대화객체 - Statement)
+			rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+
+				Emp e = new Emp(rs.getInt(1), rs.getString(2));
+				list.add(e);
+
+			}
+			// 4. 자원의 해제
+			rs.close();
+			stmt.close();
+			con.close();
+			// 5. 예외 처리
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			System.out.println(e1.getMessage());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		String info = "jdbc:oracle:thin:@localhost:1521:xe";
+		try {
+			con = DriverManager.getConnection(info, "scott", "tiger");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("접속 성공");
+
+		return list;
+  	}
+
+public static void main(String[] args) {
 		A01_Dao dao = new A01_Dao();
 			
 		dao.deleteEmp(7369);
