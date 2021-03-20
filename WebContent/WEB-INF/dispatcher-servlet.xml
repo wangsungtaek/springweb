@@ -23,7 +23,7 @@
 	<context:property-placeholder
 		location="classpath:/resource/properties/info"/>
       
-	<!-- 
+	<!--
 	스프링에서 사용하게 될 초기 로딩객체를 선언한다.
 	 
 	<bean class="springweb.a01_start.A01_StartController"></bean>
@@ -75,4 +75,5 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="springweb.a02_mvc.a03_dao"/>
 	</bean>
+	
 </beans>

@@ -106,10 +106,10 @@
 	<select id="getJobs" resultMap="strMap">
 		SELECT DISTINCT job FROM emp
 	</select>
-<!-- 
+
 	<select id="getMgrs" resultMap="empResult">
 		SELECT DISTINCT e.mgr, m.ename
 		FROM emp e, emp m
 		WHERE e.mgr = m.empno
-	</select> -->
+	</select>
 </mapper>

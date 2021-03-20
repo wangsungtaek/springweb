@@ -1,16 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="springweb.a02_mvc.a03_dao.A01_EmpDao">
-<!-- 
-// springweb.a02_mvc.a03_dao.A01_EmpDao : namespace
-// emplist : id
-// ArrayList<Emp> : resultMap
-// (Emp sch) : resultType
- -->
-	<resultMap type="emp" id="empResult"/>
+	<resultMap type="emp" id="empResult" />
 	<select id="emplist" resultMap="empResult" parameterType="emp">
-		SELECT * FROM emp2
+		Select * from emp01
+		WHERE 1=1
+		AND ename like '%'||upper(#{ename})||'%'
+		AND job like '%'||upper(#{job})||'%'
+		order by empno desc
 	</select>
+	<insert id="empInsert" parameterType="emp">
+		INSERT INTO emp01 VALUES(emp01_seq.nextval, #{ename},
+		#{job}, #{mgr}, SYSDATE, #{sal}, #{comm}, #{deptno})
+	</insert>
+
+	<select id="totCnt" resultType="int">
+		select count(*) from emp01
+	</select>
+	<select id="getEmp" resultType="emp" parameterType="int">
+		SELECT *
+		from emp01
+		WHERE empno=#{empno}
+	</select>
+	<resultMap type="emp2" id="emp2Result" />
+	<select id="searchEmp1" resultMap="emp2Result"
+		parameterType="emp2">
+		SELECT empno
+		from emp01
+		WHERE sal BETWEEN #{start} AND #{end}
+	</select>
+
+	<resultMap type="int" id="intRs" />
+	<select id="searchEmp2" resultMap="intRs" parameterType="emp2">
+		SELECT
+		empno
+		from emp01
+		WHERE sal BETWEEN #{start} AND #{end}
+	</select>
+	<select id="searchEmp3" resultMap="intRs"
+		parameterType="hashmap">
+		SELECT empno
+		from emp01
+		WHERE sal BETWEEN #{start} AND
+		#{end}
+	</select>
+	<select id="getDeptno" resultType="dept" parameterType="int">
+		SELECT *
+		FROM dept
+		WHERE deptno=#{deptno}
+	</select>
+	<select id="maxSal" resultMap="empResult">
+		SELECT deptno, max(sal) sal
+		from emp01
+		GROUP BY deptno
+	</select>
+	<select id="seachJob" resultMap="empResult"
+		parameterType="String">
+		SELECT *
+		from emp01
+		WHERE job = #{job}
+	</select>
+	<select id="maxSalDeptno" resultType="int" parameterType="int">
+		SELECT
+		max(sal)
+		from emp01
+		WHERE deptno = #{deptno}
+	</select>
+	<!-- select * from dept where dname like '%'||#{dname}||'%' and job like 
+		'%'||#{job}||'%' public Dept getInfo(String dname, String job); -->
+	<select id="getInfo" resultType="dept" parameterType="String">
+		select *
+		from dept
+		where dname like '%'||#{dname}||'%'
+		and job like
+		'%'||#{job}||'%'
+	</select>
+	<!-- ArrayList<EmpDept> schEDGList(EmpDept sch); -->
+	<resultMap type="empdept" id="edMap" />
+	<select id="schEDGList" resultMap="edMap"
+		parameterType="empdept">
+		SELECT e.*, dname, loc, grade
+		from emp01 e, dept d, SALGRADE s
+		WHERE e.deptno = d.deptno
+		AND e.sal BETWEEN s.losal AND s.hisal
+		<if test="job!=null and job !='' ">
+			AND job = #{job}
+		</if>
+		<if test="deptno!=0">
+			AND e.deptno = #{deptno}
+		</if>
+		<if test="grade != null and grade !='' ">
+			AND grade = #{grade}
+		</if>
+	</select>
+	<!-- public ArrayList<Dept> getDepts(); public ArrayList<String> getJobs(); 
+		public ArrayList<Emp> getMgrs(); -->
+	<resultMap type="dept" id="deptMap" />
+	<select id="getDepts" resultMap="deptMap">
+		SELECT * FROM DEPT
+	</select>
+
+	<resultMap type="String" id="strMap" />
+	<select id="getJobs" resultMap="strMap">
+		SELECT DISTINCT job FROM emp
+	</select>
+<!-- 
+	<select id="getMgrs" resultMap="empResult">
+		SELECT DISTINCT e.mgr, m.ename
+		FROM emp e, emp m
+		WHERE e.mgr = m.empno
+	</select> -->
 </mapper>
