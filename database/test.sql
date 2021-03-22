@@ -1,2 +1,4 @@
 SELECT * FROM emp01;
 CREATE TABLE emp01 AS SELECT * FROM emp;
+
+SELECT * FROM P_notcie;
